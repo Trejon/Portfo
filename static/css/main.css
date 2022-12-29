@@ -819,9 +819,22 @@ input[type="radio"]+label:before {
     width: 32%;
 }
 
+.mobile-socials {
+    display: none;
+}
+
 @media (max-width: 600px) {
     .footer-icons {
         display: none;
+    }
+    .mobile-socials {
+        display: flex;
+        flex-direction: row;
+        text-align: center;
+        align-items: center;
+        margin-left: 26vw;
+        gap: 1.5rem;
+        list-style: none;
     }
 }
 
@@ -1355,7 +1368,7 @@ button {
     -webkit-transition: -webkit-transform 0.325s ease-in-out, -webkit-filter 0.325s ease-in-out;
     -ms-transition: -ms-transform 0.325s ease-in-out, -ms-filter 0.325s ease-in-out;
     transition: transform 0.325s ease-in-out, filter 0.325s ease-in-out;
-    background-image: url("../../static/assets/images/snow-mountains1.jpg");
+    background-image: url("../../static/assets/images/snow-mountains.jpg");
     filter: brightness(60%);
     background-position: center;
     background-size: cover;
