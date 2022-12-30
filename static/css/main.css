@@ -796,9 +796,17 @@ input[type="radio"]+label:before {
     display: flex;
     flex-direction: row;
     text-align: center !important;
-    margin-left: 40%;
+    margin-left: 38.5%;
     gap: 5%;
     list-style: none;
+}
+
+.one {
+    margin-left: 42.5%;
+}
+
+.three {
+    margin-left: 35%;
 }
 
 .section-heading {
