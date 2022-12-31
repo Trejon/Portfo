@@ -792,6 +792,20 @@ input[type="radio"]+label:before {
     position: absolute;
 }
 
+.heroku-disclaimer:hover {
+    color: lightskyblue;
+}
+
+.section-subheading {
+    margin-top: -3vh;
+}
+
+.note {
+    font-weight: 900;
+    font-size: 14px;
+    color: gray;
+}
+
 .project-links {
     display: flex;
     flex-direction: row;
