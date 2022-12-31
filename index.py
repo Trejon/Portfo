@@ -1,10 +1,17 @@
+import os
 from flask import Flask, render_template, url_for, request, redirect
 import csv
+from dotenv import load_dotenv
+import smtplib
+from email.message import EmailMessage
 app = Flask(__name__)
 print(__name__)
 
+load_dotenv()
+
 @app.route('/')
 def my_home():
+  print(os.environ.get('EMAIL_PASSWORD'))
   return render_template('index.html')
 
 @app.route('/<string:page_name>')
@@ -26,11 +33,31 @@ def write_to_csv(data):
     csv_writer = csv.writer(database2, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     csv_writer.writerow([email,name,message])
 
+def email_alert(subject, body, to):
+  email = body["email"]
+  name = body["name"]
+  message = body["message"]
+  msg = EmailMessage()
+  msg.set_content(f"You've got a new message from {name} at {email}: {message}")
+  msg['subject'] = subject
+  msg['to'] = to
+
+  user = os.environ.get('EMAIL_VALUE')
+  msg['From'] = user
+  password = os.environ.get('EMAIL_PASSWORD')
+
+  server = smtplib.SMTP("smtp.gmail.com", 587)
+  server.starttls()
+  server.login(user, password)
+  server.send_message(msg)
+  return server.quit()
 
 @app.route('/submit_form', methods=['POST', 'GET'])
 def submit_form():
   if request.method == 'POST':
     data = request.form.to_dict()
+    email_alert('Website notification', data, os.environ.get('EMAIL_RECIPIENT'))
+    email_alert('Website notification', data, os.environ.get('PHONE_RECIPIENT'))
     write_to_csv(data)
     return redirect('/thankyou.html')
   else:
