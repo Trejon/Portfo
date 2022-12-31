@@ -1,13 +1,13 @@
 import os
 from flask import Flask, render_template, url_for, request, redirect
 import csv
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 import smtplib
 from email.message import EmailMessage
 app = Flask(__name__)
 print(__name__)
 
-load_dotenv()
+# load_dotenv()
 
 @app.route('/')
 def my_home():
