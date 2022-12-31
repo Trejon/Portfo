@@ -11,8 +11,11 @@ print(__name__)
 
 @app.route('/')
 def my_home():
-  print(os.environ.get('EMAIL_PASSWORD'))
   return render_template('index.html')
+
+@app.route('/submit_form')
+def send_thanks():
+  return render_template('thankyou.html')
 
 @app.route('/<string:page_name>')
 def html_page(page_name):
@@ -58,7 +61,6 @@ def submit_form():
     data = request.form.to_dict()
     email_alert('Website notification', data, os.environ.get('EMAIL_RECIPIENT'))
     email_alert('Website notification', data, os.environ.get('PHONE_RECIPIENT'))
-    write_to_csv(data)
     return redirect('/thankyou.html')
   else:
     return 'Something went wrong, try again'
